@@ -3,7 +3,6 @@ package ru.practicum.practicum.steps;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import ru.practicum.practicum.model.User;
-//import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 public class UserSteps {
