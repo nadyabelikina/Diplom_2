@@ -5,7 +5,6 @@ import ru.practicum.practicum.model.Order;
 
 
 import static io.restassured.RestAssured.given;
-
 public class OrderSteps {
 
 

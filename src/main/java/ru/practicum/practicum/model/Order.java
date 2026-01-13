@@ -1,5 +1,4 @@
 package ru.practicum.practicum.model;
-
 import java.util.ArrayList;
 
 public class Order {
