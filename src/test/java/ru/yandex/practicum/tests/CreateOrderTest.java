@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.*;
 
 /**
- * 4. Создание заказа:
+ * 3. Создание заказа:
  * * с авторизацией,
  * * без авторизации,
  * * с ингредиентами,

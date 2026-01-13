@@ -1,8 +1,8 @@
 package ru.yandex.practicum.tests;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 
-import io.restassured.response.Response;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +11,11 @@ import ru.practicum.practicum.model.User;
 
 import static org.hamcrest.CoreMatchers.*;
 
+/**
+ * 2. Логин пользователя:
+ * * вход под существующим пользователем;
+ * * вход с неверным логином и паролем.
+ */
 public class LoginUserTest extends BaseTest  {
 
     private UserSteps userSteps = new UserSteps();
@@ -22,7 +27,7 @@ public class LoginUserTest extends BaseTest  {
         user = new User();
         userSteps = new UserSteps();
         user
-                .setEmail("test-data789456@ywq.ru")
+                .setEmail("test-data@yandex.ru1123")
                 .setPassword("password")
                 .setName("Username");
         userSteps.createUser(user)
@@ -36,7 +41,10 @@ public class LoginUserTest extends BaseTest  {
         }
 
     @Test
-    @DisplayName("Логин под существующим пользователем.")
+    @DisplayName("Логин под существующим пользователем. Ответ 200")
+    @Description("Post запрос на ручку /api/auth/login")
+    @Step("Login user")
+
     public void loginWithUserTrueTest() {
         UserSteps
                .login(user)
@@ -48,7 +56,9 @@ public class LoginUserTest extends BaseTest  {
     }
 
     @Test
-    @DisplayName("Логин под неверным именем почты.")
+    @DisplayName("Логин под неверным именем почты. Ответ 401")
+    @Description("Post запрос на ручку /api/auth/login")
+    @Step("Login user")
     public void loginWithUserFalseEmailTest() {
 
         user
@@ -60,7 +70,9 @@ public class LoginUserTest extends BaseTest  {
     }
 
     @Test
-    @DisplayName("Логин под неверным паролем.")
+    @DisplayName("Логин под неверным паролем. Ответ 401")
+    @Description("Post запрос на ручку /api/auth/login")
+    @Step("Login user")
     public void loginWithUserFalsePasswordTest() {
 
         user

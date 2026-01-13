@@ -1,5 +1,7 @@
 package ru.yandex.practicum.tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 
 import io.restassured.response.Response;
@@ -12,6 +14,12 @@ import ru.practicum.practicum.model.User;
 
 import static org.hamcrest.CoreMatchers.*;
 
+/**
+ * 1. Создание пользователя:
+ * * создать уникального пользователя;,
+ * * создать пользователя, который уже зарегистрирован;
+ * * создать пользователя и не заполнить одно из обязательных полей.
+ */
 public class CreateUserTest  extends BaseTest {
 
     private UserSteps userSteps = new UserSteps();
@@ -29,7 +37,9 @@ public class CreateUserTest  extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создание нового уникального пользователя.")
+    @DisplayName("Создание нового уникального пользователя. Ответ 200")
+    @Description("Post запрос на ручку /api/auth/register")
+    @Step("Создание пользователя")
     public void createUniqueUserTest() {
        userSteps
                 .createUser(user)
@@ -41,7 +51,9 @@ public class CreateUserTest  extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создать пользователя, который уже зарегистрирован.")
+    @DisplayName("Создать пользователя, который уже зарегистрирован. Ответ 403")
+    @Description("Post запрос на ручку /api/auth/register")
+    @Step("Создание пользователя")
     public void createRegisteredUserTest() {
         user
                 .setEmail("test-data@yandex.ru");
@@ -52,7 +64,10 @@ public class CreateUserTest  extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создать пользователя без email")
+    @DisplayName("Создать пользователя без email. Ответ 403")
+    @Description("Post запрос на ручку /api/auth/register")
+    @Step("Создание пользователя")
+
     public void createUserWithoutLoginTest() {
         user
                 .setEmail("");
@@ -63,7 +78,9 @@ public class CreateUserTest  extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создать пользователя без password")
+    @DisplayName("Создать пользователя без password. Ответ 403")
+    @Description("Post запрос на ручку /api/auth/register")
+    @Step("Создание пользователя")
     public void createUserWithoutPasswordTest() {
         user
                 .setPassword("");
@@ -74,7 +91,9 @@ public class CreateUserTest  extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создать пользователя без Name")
+    @DisplayName("Создать пользователя без Name. Ответ 403")
+    @Description("Post запрос на ручку /api/auth/register")
+    @Step("Создание пользователя")
     public void createUserWithoutNameTest() {
         user
                 .setName("");
@@ -92,7 +111,6 @@ public class CreateUserTest  extends BaseTest {
                     .extract().body().path("accessToken");
             if (accessTokenWithBearer != null) {
                 String accessToken = accessTokenWithBearer.replace("Bearer ", "");
-               System.out.println(accessToken);
                 userSteps.deleteUser(accessToken);
             }
 
